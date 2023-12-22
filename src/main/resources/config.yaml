@@ -1,0 +1,8 @@
+http:
+  port: "8082"
+  
+training:
+  host: "http://training4-american-ws.cloudhub.io"
+  port: "80"
+  basepath: "/"
+  protocol: "HTTP"

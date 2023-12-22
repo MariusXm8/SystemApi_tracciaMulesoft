@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns:wsc="http://www.mulesoft.org/schema/mule/wsc" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd 
+http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd
+http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd">
+	<flow name="mainFlow" doc:id="3e061d2f-5482-43f7-9e60-e5601a58dfb4" >
+		<set-variable value='#[message.attributes.queryParams.destination default "SFO"]' doc:name="destination" doc:id="5576085f-bbed-4549-bc69-c43b6137956c" variableName="destination" />
+		<http:request method="GET" doc:name="get training flights" doc:id="20815d23-f809-4ee8-8559-34259863728e" config-ref="HTTP_Request_configuration" target="payload" url="http://training4-american-ws.cloudhub.io/api/flights">
+			<http:query-params ><![CDATA[#[{
+	destination: vars.destination
+}]]]></http:query-params>
+		</http:request>
+		<set-payload value="#[vars.payload]" doc:name="Risult" doc:id="7bb9664f-e5f0-4169-bd0c-7897554f484f" />
+	</flow>
+</mule>
